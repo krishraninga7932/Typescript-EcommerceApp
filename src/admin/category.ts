@@ -52,6 +52,7 @@ categoryForm?.addEventListener("submit", (e) => {
             category.name=name
         }
         editCategoryId=null
+        alert("Category updated successfully");
     } else {
         const newCategory: Category = {
             id: Date.now(),
@@ -59,6 +60,7 @@ categoryForm?.addEventListener("submit", (e) => {
         }
 
         categories.push(newCategory)
+        alert("Category created successfully");
     }
 
     saveCategory(categories)

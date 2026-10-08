@@ -20,21 +20,13 @@ function getProducts(): Product[] {
 }
 
 const addProductBtn = document.querySelector<HTMLButtonElement>("#addProductBtn");
-
 const productFormContainer = document.querySelector<HTMLDivElement>("#productFormContainer");
-
 const productForm = document.querySelector<HTMLFormElement>("#productForm");
-
 const productNameInput = document.querySelector<HTMLInputElement>("#productName");
-
 const productDescriptionInput = document.querySelector<HTMLTextAreaElement>("#productDescription");
-
 const productImageUrlInput = document.querySelector<HTMLInputElement>("#productImageUrl");
-
 const productCategoryInput = document.querySelector<HTMLSelectElement>("#productCategory");
-
 const productIsActiveInput = document.querySelector<HTMLInputElement>("#productIsActive");
-
 const productTableBody = document.querySelector<HTMLTableSectionElement>("#productTableBody");
 
 
@@ -77,6 +69,7 @@ productForm?.addEventListener("submit", (e) => {
         }
 
         editProductId = null;
+        alert("Product updated successfully");
     } else {
         const newProduct: Product = {
             id: Date.now(),
@@ -89,6 +82,7 @@ productForm?.addEventListener("submit", (e) => {
             updatedAt: new Date().toISOString()
         }
         products.push(newProduct)
+        alert("Product created successfully");
     }
     saveProducts(products)
     displayProducts()
