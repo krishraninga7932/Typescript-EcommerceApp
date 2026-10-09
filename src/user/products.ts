@@ -3,6 +3,7 @@ import { getCart, saveCart } from "./cart.js";
 type Product = {
     id: number;
     name: string;
+    price: number,
     description: string;
     category: number;
     imageUrl: string;
@@ -63,6 +64,7 @@ function displayProducts(): void {
     } else {
         emptyProduct.classList.add("d-none")
         const categories = getCategory();
+        const cart = getCart()
 
         activePro.forEach((prod) => {
             const category = categories.find(cat => cat.id === prod.category)
@@ -88,6 +90,9 @@ function displayProducts(): void {
                     <p class="text-muted small mb-2">
                         ${category?.name}
                     </p>
+                    <p class="fw-bold fs-5 mb-2">
+                        ₹${prod.price}
+                    </p>
 
                     <p class="card-text">
                         ${prod.description}
@@ -103,9 +108,17 @@ function displayProducts(): void {
         `;
             productList.appendChild(col)
             const addToCartBtn = col.querySelector<HTMLButtonElement>(".addToCartBtn");
+            const cartItems = cart.find(item => item.productId === prod.id)
+
+            if (cartItems && addToCartBtn) {
+                addToCartBtn.disabled = true;
+                addToCartBtn.style.cursor = "not-allowed";
+            }
 
             addToCartBtn?.addEventListener("click", () => {
                 addToCart(prod.id);
+                addToCartBtn.disabled = true;
+                addToCartBtn.style.cursor = "not-allowed";
 
             });
         })
@@ -113,16 +126,6 @@ function displayProducts(): void {
     }
 
 }
-displayProducts()
-searchProduct?.addEventListener("input", () => {
-    displayProducts()
-})
-filterCategory?.addEventListener("change", () => {
-    displayProducts()
-})
-sortProduct?.addEventListener("change", () => {
-    displayProducts()
-})
 
 
 function displayCategoryOption(): void {
@@ -134,7 +137,6 @@ function displayCategoryOption(): void {
         filterCategory?.appendChild(option)
     })
 }
-displayCategoryOption()
 
 
 function updateCartCount(): void {
@@ -156,3 +158,17 @@ function addToCart(productId: number): void {
     saveCart(cart)
     updateCartCount()
 }
+
+
+displayProducts()
+searchProduct?.addEventListener("input", () => {
+    displayProducts()
+})
+filterCategory?.addEventListener("change", () => {
+    displayProducts()
+})
+sortProduct?.addEventListener("change", () => {
+    displayProducts()
+})
+updateCartCount()
+displayCategoryOption()

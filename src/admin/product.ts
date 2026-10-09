@@ -4,6 +4,7 @@ type Product = {
     name: string,
     description: string,
     category: number,
+    price:number,
     imageUrl: string,
     isActive: boolean,
     createdAt: string,
@@ -16,13 +17,19 @@ function saveProducts(products: Product[]): void {
 function getProducts(): Product[] {
     const data = localStorage.getItem("products")
     if (!data) return []
-    return JSON.parse(data) as Product[]
+     const products = JSON.parse(data) as Product[];
+
+    return products.map((product) => ({
+        ...product,
+        price: product.price ?? 0
+    }));
 }
 
 const addProductBtn = document.querySelector<HTMLButtonElement>("#addProductBtn");
 const productFormContainer = document.querySelector<HTMLDivElement>("#productFormContainer");
 const productForm = document.querySelector<HTMLFormElement>("#productForm");
 const productNameInput = document.querySelector<HTMLInputElement>("#productName");
+const productPriceInput = document.querySelector<HTMLInputElement>("#productPrice");
 const productDescriptionInput = document.querySelector<HTMLTextAreaElement>("#productDescription");
 const productImageUrlInput = document.querySelector<HTMLInputElement>("#productImageUrl");
 const productCategoryInput = document.querySelector<HTMLSelectElement>("#productCategory");
@@ -39,6 +46,7 @@ productForm?.addEventListener("submit", (e) => {
     if (
         !productForm ||
         !productNameInput ||
+        !productPriceInput ||
         !productDescriptionInput ||
         !productImageUrlInput ||
         !productCategoryInput ||
@@ -51,8 +59,9 @@ productForm?.addEventListener("submit", (e) => {
     const desc = productDescriptionInput.value.trim();
     const imageUrl = productImageUrlInput.value.trim();
     const category = Number(productCategoryInput.value);
+    const price=Number(productPriceInput?.value)
     const isActive = productIsActiveInput.checked;
-    if (!name || !desc || !imageUrl || !category) {
+    if (!name || !desc || !imageUrl || !category || price<=0) {
         return;
     }
 
@@ -64,6 +73,7 @@ productForm?.addEventListener("submit", (e) => {
             product.description = desc;
             product.imageUrl = imageUrl;
             product.category = category;
+            product.price=price
             product.isActive = isActive;
             product.updatedAt = new Date().toISOString();
         }
@@ -76,6 +86,7 @@ productForm?.addEventListener("submit", (e) => {
             name: name,
             description: desc,
             category: category,
+            price:price,
             imageUrl: imageUrl,
             isActive: isActive,
             createdAt: new Date().toISOString(),
@@ -133,6 +144,8 @@ function displayProducts(): void {
 
             <td>${category?.name}</td>
 
+            <td>${product.price.toFixed(2)}</td>
+
             <td>
                 ${product.isActive ? "Active" : "Inactive"}
             </td>
@@ -174,6 +187,7 @@ function editProduct(id: number): void {
     if (
         !product ||
         !productNameInput ||
+        !productPriceInput||
         !productDescriptionInput ||
         !productImageUrlInput ||
         !productCategoryInput ||
@@ -186,6 +200,7 @@ function editProduct(id: number): void {
     productDescriptionInput.value = product.description;
     productImageUrlInput.value = product.imageUrl;
     productCategoryInput.value = product.category.toString();
+    productPriceInput.value=product.price.toString()
     productIsActiveInput.checked = product.isActive;
 
     productFormContainer?.classList.remove("d-none")
