@@ -144,7 +144,7 @@ function displayProducts(): void {
 
             <td>${category?.name}</td>
 
-            <td>${product.price.toFixed(2)}</td>
+            <td>₹${product.price.toFixed(2)}</td>
 
             <td>
                 ${product.isActive ? "Active" : "Inactive"}
