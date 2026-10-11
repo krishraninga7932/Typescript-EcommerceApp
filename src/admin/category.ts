@@ -66,7 +66,7 @@ categoryForm?.addEventListener("submit", (e) => {
     saveCategory(categories)
 
     displayCategories()
-
+    window.dispatchEvent(new Event("categoriesUpdated"));
     categoryForm.reset()
     categoryFormContainer?.classList.add("d-none")
 
@@ -111,6 +111,7 @@ function deleteCategory(id: number): void {
     const updatedCategory = categories.filter(category => category.id !== id)
     saveCategory(updatedCategory)
     displayCategories()
+    window.dispatchEvent(new Event("categoriesUpdated"));
 }
 
 let editCategoryId: number | null = null

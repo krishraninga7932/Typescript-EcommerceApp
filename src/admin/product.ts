@@ -105,6 +105,9 @@ productForm?.addEventListener("submit", (e) => {
 function displayCategoriesOptions(): void {
     if (!productCategoryInput) return
     const categories = getCategory();
+    productCategoryInput.innerHTML = `
+        <option value="">Select Category</option>
+    `;
     categories.forEach((category) => {
         const option = document.createElement("option")
         option.value = category.id.toString()
@@ -114,6 +117,9 @@ function displayCategoriesOptions(): void {
     })
 }
 displayCategoriesOptions()
+window.addEventListener("categoriesUpdated", () => {
+    displayCategoriesOptions();
+});
 
 function displayProducts(): void {
     const products = getProducts();

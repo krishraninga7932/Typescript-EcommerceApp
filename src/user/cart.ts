@@ -1,3 +1,6 @@
+import type { User } from "../auth/auth.js";
+import "../auth/guard.js";
+import "../auth/logout.js";
 type cartItem = {
     productId: number,
     quantity: number
@@ -35,13 +38,27 @@ declare const bootstrap: {
 
 
 function getCart(): cartItem[] {
-    const data = localStorage.getItem("cart")
+    const currentUser=localStorage.getItem("currentUser")
+    if(!currentUser)return[]
+    const user=JSON.parse(currentUser) as User;
+
+
+    const data = localStorage.getItem(`cart_${user.id}`)
     if (!data) return []
     return JSON.parse(data) as cartItem[]
 }
 
 function saveCart(cart: cartItem[]): void {
-    localStorage.setItem("cart", JSON.stringify(cart))
+    const currentUser = localStorage.getItem("currentUser");
+
+    if (!currentUser) return;
+
+    const user = JSON.parse(currentUser) as User;
+
+    localStorage.setItem(
+        `cart_${user.id}`,
+        JSON.stringify(cart)
+    );
 }
 
 function getProduct(): Product[] {
@@ -168,6 +185,22 @@ function updateCartTotal(): void {
     cartGrandTotal.textContent = `₹${grandTotal.toFixed(2)}`;
 }
 
+
+function updateCartCount(): void {
+    const cart = getCart();
+    let totalQuantity = 0;
+
+    cart.forEach((item) => {
+        totalQuantity += item.quantity;
+    });
+
+    const cartCount = document.querySelector<HTMLSpanElement>("#cartCount");
+
+    if (cartCount) {
+        cartCount.textContent = totalQuantity.toString();
+    }
+}
+
 function EmptyCart(): void {
     if (!checkoutBtn) return
     checkoutBtn.disabled = getCart().length === 0
@@ -187,6 +220,7 @@ confirmOrderBtn?.addEventListener("click", () => {
     saveCart([]);
     displayCart();
     updateCartTotal();
+    updateCartCount();
     EmptyCart();
     document.querySelector("#cartCount")!.textContent = "0";
 
@@ -202,6 +236,7 @@ confirmOrderBtn?.addEventListener("click", () => {
 
 displayCart()
 updateCartTotal()
+updateCartCount()
 EmptyCart()
 
 

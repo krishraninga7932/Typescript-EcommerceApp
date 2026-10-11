@@ -1,5 +1,7 @@
 import { getCategory } from "../admin/category.js";
 import { getCart, saveCart } from "./cart.js";
+import "../auth/guard.js";
+import "../auth/logout.js";
 type Product = {
     id: number;
     name: string;
