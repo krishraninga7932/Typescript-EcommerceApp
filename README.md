@@ -70,7 +70,7 @@ Before starting, make sure you have installed:
 Open a terminal and run:
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/krishraninga7932/Typescript-EcommerceApp.git
 ```
 
 Navigate to the project directory:
