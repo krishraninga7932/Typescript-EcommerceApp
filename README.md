@@ -115,6 +115,7 @@ Keep this terminal running while developing.
 2. Start the Live Server extension from the project.
 3. Open `pages/register.html` in the browser through Live Server.
 4. Register a user and explore the application's functionality.
+5. In admin first create categories than create products.
 
 **Important:** Compile the TypeScript before launching the application. If you change TypeScript files while watch mode is running, the compiler will rebuild the JavaScript automatically.
 
