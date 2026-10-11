@@ -1,6 +1,6 @@
 # TypeScript E-commerce App
 
-A simple e-commerce web application built using **HTML, CSS, Bootstrap, TypeScript, and LocalStorage**. This project demonstrates product management, user authentication, shopping cart functionality, and checkout flow without requiring a backend server.
+An e-commerce web application built using **HTML, CSS, Bootstrap, TypeScript, and LocalStorage**. This project demonstrates product management, user authentication, shopping cart functionality, and checkout flow without requiring a backend server.
 
 ## Features
 
@@ -61,6 +61,7 @@ Before starting, make sure you have installed:
 - [Node.js and npm](https://nodejs.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - The Live Server extension in VS Code
+- (Admin Code:- ADMIN@123)
 
 ## Getting Started
 
@@ -69,7 +70,7 @@ Before starting, make sure you have installed:
 Open a terminal and run:
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/krishraninga7932/Typescript-EcommerceApp.git
 ```
 
 Navigate to the project directory:
@@ -108,12 +109,13 @@ npx tsc --watch
 
 Keep this terminal running while developing.
 
-### 5. Run the application
+### 5. Run the application (Admin Code:- ADMIN@123)
 
 1. Open the project folder in Visual Studio Code.
 2. Start the Live Server extension from the project.
 3. Open `pages/register.html` in the browser through Live Server.
 4. Register a user and explore the application's functionality.
+5. In admin first create categories than create products.
 
 **Important:** Compile the TypeScript before launching the application. If you change TypeScript files while watch mode is running, the compiler will rebuild the JavaScript automatically.
 
