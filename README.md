@@ -61,6 +61,7 @@ Before starting, make sure you have installed:
 - [Node.js and npm](https://nodejs.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - The Live Server extension in VS Code
+- (Admin Code:- ADMIN@123)
 
 ## Getting Started
 
@@ -108,7 +109,7 @@ npx tsc --watch
 
 Keep this terminal running while developing.
 
-### 5. Run the application
+### 5. Run the application (Admin Code:- ADMIN@123)
 
 1. Open the project folder in Visual Studio Code.
 2. Start the Live Server extension from the project.
