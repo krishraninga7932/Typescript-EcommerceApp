@@ -1,6 +1,6 @@
 # TypeScript E-commerce App
 
-A simple e-commerce web application built using **HTML, CSS, Bootstrap, TypeScript, and LocalStorage**. This project demonstrates product management, user authentication, shopping cart functionality, and checkout flow without requiring a backend server.
+An e-commerce web application built using **HTML, CSS, Bootstrap, TypeScript, and LocalStorage**. This project demonstrates product management, user authentication, shopping cart functionality, and checkout flow without requiring a backend server.
 
 ## Features
 
